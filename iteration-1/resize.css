@@ -1,0 +1,18 @@
+p {
+  background: lime;
+  height: 200px;
+  width: 300px;
+}
+p.resizable {
+  background: cyan;
+  position: relative;
+}
+.resizeHandle {
+  width: 10px;
+  height: 10px;
+  background: blue;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  cursor: se-resize;
+}

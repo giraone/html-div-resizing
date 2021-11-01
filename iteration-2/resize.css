@@ -1,0 +1,119 @@
+body {
+  height: 100vh;
+  overflow: hidden;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 14px;
+  color: #abb1b4;
+  background-color: #1f2227;
+}
+
+blockquote, body, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, li, ol, p, pre, td, textarea, th, ul {
+  margin: 0;
+  padding: 0;
+}
+
+/*- HEADER, MAIN (layout-container), SIDEBAR, CONTENT -*/
+
+header {
+  height: 60px;
+  background: #1a1d21;
+  box-shadow: 0 0 5px rgba(26,29,33,0);
+  z-index: 100;
+  width: 100vw;
+}
+
+#layout-container {
+  position: relative;
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  grid-template-areas: "sidebar content";
+}
+
+#sidebar {
+  display: flex;
+  flex-direction: column;
+  grid-area: sidebar;
+  position: relative;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  background: #304040;
+  color: #cfd0d1;
+}
+
+#content {
+  grid-area: content;
+  position: relative;
+}
+
+/*- COLUMNS and ROWS -*/
+
+div.columns {
+  width: 100vw;
+  height: calc(100vh - 60px);
+  overflow: hidden;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+div.column1 {
+  float: left;
+  width: calc(50vw - (150px / 2) - (4px / 2));
+  height: calc(100vh - 60px);
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+div.column2 {
+  float: left;
+  left: calc(50vw + 4px);
+  width: calc(50vw - (150px / 2) - (4px / 2));
+  height: calc(100vh - 60px);
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+div.verticalBar {
+  float: left;
+  left: 50vw;
+  width: 4px;
+  height: calc(100vh - 60px);
+  background-color: grey;
+  cursor: ew-resize;
+}
+div.horizontalBar {
+  top: 50vh;
+  height: 4px;
+  background-color: grey;
+  cursor: ns-resize;
+}
+div.card {
+  color: black;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  padding: 4px;
+}
+div.card50 {
+  height: calc(50vh - (4px / 2));
+}
+div.card75 {
+  height: calc(75vh - (4px / 2));
+}
+div.card25 {
+  height: calc(25vh - (4px / 2));
+}
+
+div.card11 {
+  
+  background-color: lightgreen;
+}
+div.card12 {
+  background-color: lightsalmon;
+}
+div.card21 {
+  background-color: lightblue;
+}
+div.card22 {
+  background-color: lightcoral
+}
+
+.resizing {
+  background: red;
+}

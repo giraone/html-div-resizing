@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>One DIV resizable by JavaScript</title>
+<link rel="stylesheet" href="resize.css">
+<script src="resize.js"></script>
+<script>
+function onload() {
+	const element = document.getElementById("elem1");
+	console.log(element);
+	const resizer = new Resizer(element);
+	console.log(resizer.getStatus());
+	resizer.init();
+}
+</script>
+</head>
+
+<body onload="onload()">
+	<p id="elem1">Click to make me resizable</p>
+</body>
+</html>
