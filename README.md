@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 # html-div-resizing
 
 *This project contains HTML5/CSS3/ECMAScript code samples how to implements resizable DIVs.*
