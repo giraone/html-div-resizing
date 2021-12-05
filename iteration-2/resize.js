@@ -45,12 +45,12 @@ class Resizer {
       const delta = e.clientY - this.lastPos;
       const elem1Dim = this.dim1 + delta;
       if (elem1Dim < this.limitTopLeft) {
-        this._mouseUp();
+        this._mouseUp(e);
         return;
       }
       const elem2Dim = this.dim2 - delta;
       if (elem2Dim - this.reservedPixelSize < this.limitBottomRight) {
-        this._mouseUp();
+        this._mouseUp(e);
         return;
       }
       this.element1.style.height = elem1Dim + "px";
@@ -62,12 +62,12 @@ class Resizer {
       const delta = e.clientX - this.lastPos;
       const elem1Dim = this.dim1 + delta;
       if (elem1Dim < this.limitTopLeft) {
-        this._mouseUp();
+        this._mouseUp(e);
         return;
       }
       const elem2Dim = this.dim2 - delta;
       if (elem2Dim - this.reservedPixelSize < this.limitBottomRight) {
-        this._mouseUp();
+        this._mouseUp(e);
         return;
       }
       this.element1.style.width = elem1Dim + "px";
