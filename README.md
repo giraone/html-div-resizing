@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 # html-div-resizing
 
 *This project contains HTML5/CSS3/ECMAScript code samples how to implements resizable DIVs.*
@@ -18,5 +17,12 @@
 - There is a minimal and maximal limit, so that no panel disappears
 - The solution handles also resize events of the window itself
 
-
 ![iteration-2](docs/images/iteration2.png "Four DIVs with vertical and horizontal resize bars")
+
+## Iteration 3
+
+- Six DIVs (4 in the left column, 2 in the right column)
+- Each row or column can have multiple resizable div, not only two
+- The color of the resize handle is controlled completely by CSS `:hover` and `:active`
+
+![iteration-3](docs/images/iteration3.png "Six DIVs with vertical and horizontal resize bars")

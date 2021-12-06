@@ -12,41 +12,44 @@ class Resizer {
     this.limitTopLeft = 15;
     this.limitBottomRight = 15; // 15+20, wenn nicht overflow:hidden wg. scrollbar
 
-    this.clickListener = (e) => this._click(e);
-    this.mouseDownListener = (e) => this._mouseDown(e);
-    this.mouseMoveListener = (e) => this._mouseMove(e);
-    this.mouseUpListener = (e) => this._mouseUp(e);
+    this.mouseDownListeners = new Array(this.bars.length);
+    this.mouseMoveListeners = new Array(this.bars.length);
+    this.mouseUpListeners = new Array(this.bars.length);
+    for (let i = 0; i < this.bars.length; i++) {
+      this.mouseDownListeners[i] = (e) => this._mouseDown(e, i);
+      this.mouseMoveListeners[i] = (e) => this._mouseMove(e, i);
+      this.mouseUpListeners[i] = (e) => this._mouseUp(e, i);
+    }
   }
 
   init() {
-    for (let i = 0; i < this.elements.length; i++) {
-      this.elements[i].setAttribute('elementIndex', i);
-    }
     for (let i = 0; i < this.bars.length; i++) {
-      this.bars[i].setAttribute('barIndex', i);
-      this.bars[i].addEventListener('mousedown', this.mouseDownListener, false);
+      this.bars[i].addEventListener('mousedown', this.mouseDownListeners[i], false);
     }
   }
 
   getStatus() {
-    let ret = `{ pos=${this.lastPos}`;
-    this.dims.forEach(dim => { ret += `, ${dim}` });
-    ret += '}'
-    return ret;
+    let d = null;
+    this.dims.forEach(dim => {
+      if (d) {
+        d += `, ${dim}`
+      } else {
+        d = dim;
+      }
+    });
+    return `{ pos: ${this.lastPos}, dim: [${d}]}`;
   }
 
-  _mouseDown(e) {
-    let index1 = this._getIndex('_mouseMove', e);
-    // console.log('>>> _mouseMove >>> ' + e.target.id + ' ' + index1);
-    if (index1 < 0) {
-      return;
-    }
+  _mouseDown(e, index1) {
+    // console.log(`>>> _mouseDown >>> ${index1} ${e.target.id}`);
     this._storePos(this.resizeVertical ? e.clientY : e.clientX, index1, index1 + 1);
-    this._signalBarDown(index1);
-    this._addEventListeners();
+    this._addEventListeners(index1);
   }
 
-  _mouseMove(e) {
+  _mouseMove(e, index1) {
+    // console.log(`>>> _mouseMove >>> ${index1} ${e.target.id}`);
+    let index2 = index1 + 1;
+   
     let delta;
     let pos;
     if (this.resizeVertical) {
@@ -56,23 +59,17 @@ class Resizer {
       pos = e.clientX;
       delta = e.clientX - this.lastPos;
     }
-    let index1 = this._getIndex('_mouseMove', e, delta);
-    if (index1 < 0) {
-      this._removeEventListeners();
-      return;
-    }
-    let index2 = index1 + 1;
 
     const elem1Dim = this.dims[index1] + delta;
     if (elem1Dim < this.limitTopLeft) {
       console.log('Blocked, because to small!');
-      this._signalBarUp(index1);
+      this._removeEventListeners(index1);
       return;
     }
     const elem2Dim = this.dims[index2] - delta;
     if (elem2Dim - this.reservedPixelSize < this.limitBottomRight) {
       console.log('Blocked, because to large!');
-      this._signalBarUp(index1);
+      this._removeEventListeners(index1);
       return;
     }
 
@@ -90,54 +87,41 @@ class Resizer {
     
     this._storePos(pos, index1, index2);
     console.log(this.getStatus());
+    return true;
   }
 
-  _mouseUp(e) {
-    let index1 = this._getIndex('_mouseUp', e);
-    if (index1 < 0) {
-      this._removeEventListeners();
-      return;
-    }
-    this._signalBarUp(index1);
+  _mouseUp(e, index1) {
+    console.log(`>>> _mouseUp >>> ${index1} ${e.target.id}`);
+    this._removeEventListeners(index1);
   }
 
-  _signalBarDown(index1) {
-    this.bars[index1].style.backgroundColor = 'red';
-  }
-  _signalBarUp(index1) {
-    if (index1 < this.bars.length) {
-      this.bars[index1].style.backgroundColor = 'grey';
-    }
-    this._removeEventListeners();
-  }
-
-  _addEventListeners() {
-    document.documentElement.addEventListener(
-      'mousemove',
-      this.mouseMoveListener,
-      false
-    );
+  _addEventListeners(index1) {
     document.documentElement.addEventListener(
       'mouseup',
-      this.mouseUpListener,
-      false
+      this.mouseUpListeners[index1],
+      true
+    );
+    document.documentElement.addEventListener(
+      'mousemove',
+      this.mouseMoveListeners[index1],
+      true
     );
   }
-  _removeEventListeners() {
+  _removeEventListeners(index1) {
     document.documentElement.removeEventListener(
       'mousemove',
-      this.mouseMoveListener,
-      false
+      this.mouseMoveListeners[index1],
+      true
     );
     document.documentElement.removeEventListener(
       'mouseup',
-      this.mouseUpListener,
-      false
+      this.mouseUpListeners[index1],
+      true
     );
   }
 
   _storePos(pos, index1, index2) {
-    // console.log('>>> _storePos >>> ' + pos + ' ' + index1 + ' ' + index2);
+    // console.log(`>>> _storePos >>> ${pos} ${index1} ${index2}`);
     this.lastPos = pos;
     if (this.resizeVertical) {      
       const cssOf1 = document.defaultView.getComputedStyle(this.elements[index1]);
@@ -151,24 +135,6 @@ class Resizer {
       this.dims[index2] = parseInt(cssOf2.width, 10);
     }
     this.lastPos = pos;
-    return index1;
-  }
-
-  _getIndex(context, e, delta) {
-    // console.log('>>> ' + context + ' >>> ' + e.target.id + ' ' + e.target.getAttribute('barIndex') + ' ' + e.target.getAttribute('elementIndex') + ' ' + delta);
-    let index = e.target.getAttribute('barIndex');
-    if (index) {
-      return parseInt(index, 10);
-    }
-    index = e.target.getAttribute('elementIndex');
-    if (!index) {
-      console.log(context + ': Target ' + e.target + ' had no attribute barIndex or elementIndex!');
-      return -1;
-    }
-    let index1 = parseInt(index, 10);
-    if (delta > 0 && index1 > 0) {
-      index1--;
-    }
     return index1;
   }
 }
