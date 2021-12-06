@@ -11,7 +11,6 @@ class Resizer {
     this.dim2 = 0;
     this.limitTopLeft = 15;
     this.limitBottomRight = 15; // 15+20, wenn nicht overflow:hidden wg. scrollbar
-    this.clickListener = (e) => this._click(e);
     this.mouseDownListener = (e) => this._mouseDown(e);
     this.mouseMoveListener = (e) => this._mouseMove(e);
     this.mouseUpListener = (e) => this._mouseUp(e);
