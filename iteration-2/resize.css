@@ -23,6 +23,7 @@ header {
 }
 
 #layout-container {
+  max-width: max-content;
   position: relative;
   display: grid;
   grid-template-columns: 150px 1fr;
