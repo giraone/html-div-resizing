@@ -1,6 +1,7 @@
 :root {
   --header-pixel-height: 60px;
   --sidebar-pixel-width: 150px;
+  --border-size: 4px;
 }
 
 body {
@@ -22,9 +23,10 @@ blockquote, body, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input
 header {
   height: var(--header-pixel-height);
   background: #1a1d21;
-  box-shadow: 0 0 5px rgba(26,29,33,0);
   z-index: 100;
   width: 100vw;
+  padding-left: 10px;
+  line-height: var(--header-pixel-height); /* vertical align single line of text */
 }
 
 #layout-container {
@@ -41,7 +43,7 @@ header {
   grid-area: sidebar;
   position: relative;
   height: 100vh;
-  padding: 0;
+  padding: 10px;
   margin: 0;
   background: #304040;
   color: #cfd0d1;
@@ -63,15 +65,15 @@ div.columns {
 }
 div.column1 {
   float: left;
-  width: calc(50vw - (var(--sidebar-pixel-width) / 2) - (4px / 2));
+  width: calc(50vw - (var(--sidebar-pixel-width) / 2) - (var(--border-size) / 2));
   height: calc(100vh - var(--header-pixel-height));
   box-sizing: border-box;
   -moz-box-sizing: border-box;
 }
 div.column2 {
   float: left;
-  left: calc(50vw + 4px);
-  width: calc(50vw - (var(--sidebar-pixel-width) / 2) - (4px / 2));
+  left: calc(50vw + var(--border-size));
+  width: calc(50vw - (var(--sidebar-pixel-width) / 2) - (var(--border-size) / 2));
   height: calc(100vh - var(--header-pixel-height));
   box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -79,7 +81,7 @@ div.column2 {
 div.verticalBar {
   float: left;
   left: 50vw;
-  width: 4px;
+  width: var(--border-size);
   height: calc(100vh - var(--header-pixel-height));
   background-color: grey;
   cursor: ew-resize;
@@ -92,7 +94,7 @@ div.verticalBar:active {
 }
 div.horizontalBar {
   top: 50vh;
-  height: 4px;
+  height: var(--border-size);
   background-color: grey;
   cursor: ns-resize;
 }
@@ -106,19 +108,19 @@ div.card {
   color: black;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
-  padding: 4px;
+  padding: 5px;
 }
 div.card25-4 {
-  height: calc(25vh - (var(--header-pixel-height)/4) - (4px / 2));
+  height: calc(25vh - (var(--header-pixel-height)/4) - (var(--border-size) / 2));
 }
 div.card25-2 {
-  height: calc(25vh - (var(--header-pixel-height)/2) - (4px / 2));
+  height: calc(25vh - (var(--header-pixel-height)/2) - (var(--border-size) / 2));
 }
 div.card50-2 {
-  height: calc(50vh - (var(--header-pixel-height)/2) - (4px / 2));
+  height: calc(50vh - (var(--header-pixel-height)/2) - (var(--border-size) / 2));
 }
 div.card75-2 {
-  height: calc(75vh - (var(--header-pixel-height)/2) - (4px / 2));
+  height: calc(75vh - (var(--header-pixel-height)/2) - (var(--border-size) / 2));
 }
 
 div.card11 {
@@ -138,8 +140,4 @@ div.card21 {
 }
 div.card22 {
   background-color: lightcoral
-}
-
-.resizing {
-  background: red;
 }

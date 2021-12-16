@@ -17,7 +17,6 @@ blockquote, body, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input
 header {
   height: 60px;
   background: #1a1d21;
-  box-shadow: 0 0 5px rgba(26,29,33,0);
   z-index: 100;
   width: 100vw;
 }
@@ -113,8 +112,4 @@ div.card21 {
 }
 div.card22 {
   background-color: lightcoral
-}
-
-.resizing {
-  background: red;
 }
