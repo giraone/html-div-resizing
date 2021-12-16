@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>DIV resize by JavaScript</title>
+    <link rel="stylesheet" href="resize.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>DIV resize by JavaScript</h1>
+    </header>
+    <main id="layout-container">
+      <div id="sidebar">
+        <h2>SIDE BAR</h2>
+      </div>
+      <div id="content">
+        <div class="columns">
+          <div class="column1" id="col1">
+            <div class="card card25-4" id="row11">
+              <div id="container-1" class="code-editor"></div>
+            </div>
+            <div class="horizontalBar" id="h11"></div>
+            <div class="card card25-4" id="row12">
+              <div id="container-2" class="code-editor"></div>
+            </div>
+            <div class="horizontalBar" id="h12"></div>
+            <div class="card card25-4" id="row13">
+              <div id="container-3" class="code-editor"></div>
+            </div>
+            <div class="horizontalBar" id="h13"></div>
+            <div class="card card25-4" id="row14">
+              <div id="container-4" class="code-editor"></div>
+            </div>
+          </div>
+          <div class="verticalBar" id="v1"></div>
+          <div class="column2" id="col2">
+            <div class="card card75-2" id="row21">
+              <pre id="pre1" class="pre pre75">
+&lt;html&gt;
+Some text content - The first line is a bit longer to check the scrollbar behaviour.
+Line1
+Line2
+Line3
+Line4
+Line5
+&lt;/html&gt;
+              </pre>
+            </div>
+            <div class="horizontalBar" id="h21"></div>
+            <div class="card card25-2" id="row22">
+              <pre id="pre2" class="pre pre25">
+Some text content
+Line1
+Line2
+Line3
+Line4
+Line5
+              </pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"
+      integrity="sha256-0SGl1PJNDyJwcV5T+weg2zpEMrh7xvlwO4oXgvZCeZk="
+      crossorigin="anonymous"
+    ></script>
+    <script src="editor.js"></script>
+    <script src="resize.js"></script>
+
+    <script>
+        console.log('require Monaco');
+        require.config({ paths: { vs: 'node_modules/monaco-editor/min/vs' } });
+
+        function initResizer() {
+          console.log('configure resizer');
+          const col1 = document.getElementById("col1");
+          const v1 = document.getElementById("v1");
+          const col2 = document.getElementById("col2");
+          const resizerV = new Resizer([col1, col2], [v1], 4, 20, false);
+          resizerV.init();
+
+          const row11 = document.getElementById("row11");
+          const h11 = document.getElementById("h11");
+          const row12 = document.getElementById("row12");
+          const h12 = document.getElementById("h12");
+          const row13 = document.getElementById("row13");
+          const h13 = document.getElementById("h13");
+          const row14 = document.getElementById("row14");
+          const resizerH1 = new Resizer([row11, row12, row13, row14], [h11, h12, h13], 4, 60, true);
+          resizerH1.init();
+
+          const row21 = document.getElementById("row21");
+          const h21 = document.getElementById("h21");
+          const row22 = document.getElementById("row22");
+          const resizerH2 = new Resizer([row21, row22], [h21], 4, 60, true);
+          resizerH2.init();
+
+          console.log('configure resizer DONE');
+        }
+
+        require(['vs/editor/editor.main'], () => {
+
+          initMonaco(1, 'json', ['{', '}']);
+          initMonaco(2, 'json', ['{', ' "color": "red",', ' "value": 1044480', '}']);
+          initMonaco(3, 'html', ['<h1>', ' <span th:text="${color}">Color</span>', ' <span>=</span>', ' <span th:text="${value}">unknown</span>', '</h1>']);
+          initMonaco(4, 'css',  ['h1 {', ' color: blue;', '}']);
+
+          initResizer();
+        });
+    </script>
+  </body>
+</html>
