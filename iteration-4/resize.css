@@ -109,7 +109,7 @@ div.code-editor {
 }
 
 pre.pre {
-  width:  calc(50vw - (var(--border-size) / 2)) - var(--scrollbar-width);
+  width:  calc(50% - (var(--border-size) / 2)) - var(--scrollbar-width);
   height: calc(100% - var(--scrollbar-width));
   font-size: 200%; /* larger to see scrollbar with less text */
   color: var(--default-color);
