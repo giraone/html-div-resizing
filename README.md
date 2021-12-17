@@ -36,6 +36,7 @@
 - The challenge in this iteration is now:
   - Allow resizing of the contained Monaco Editors and HTML &lt;pre&gt; elements from the outside resize handler.
   - Automatic switching to scrollbars, when the inner content is larger than the resized outer container.
+- For simplicity, the sidebar was removed.
 
 ### Details
 - Resizing of inner elements:
