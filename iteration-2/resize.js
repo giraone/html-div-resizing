@@ -75,7 +75,7 @@ class Resizer {
       this.element2.style.width = elem2Dim + "px";
     }
     this._storePos(e);
-    console.log(this.getStatus());
+    // console.log(this.getStatus());
   }
 
   _mouseUp(e) {
