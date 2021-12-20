@@ -24,7 +24,7 @@ blockquote, body, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input
   padding: 0;
 }
 
-/*- HEADER, MAIN (layout-container), CONTENT -*/
+/*- HEADER, MAIN -*/
 
 header {
   height: var(--header-pixel-height);
@@ -42,7 +42,7 @@ header {
 
 /*- RESIZABLE COLUMNS and ROWS -*/
 
-div.columns {
+main {
   width: 100vw;
   height: calc(100vh - var(--header-pixel-height));
   overflow: hidden;
@@ -91,7 +91,7 @@ div.horizontalBar:active {
   background-color: orangered;
 }
 
-/*- CONTENT WITHIN CELLS -*/
+/*- CELLS IN DIFFERENT SIZE -*/
 
 div.card25-4 {
   height: calc(25vh - (var(--header-pixel-height) / 4) - (var(--border-size) / 2));
@@ -103,12 +103,14 @@ div.card75-2 {
   height: calc(75vh - (var(--header-pixel-height) / 2) - (var(--border-size) / 2));
 }
 
-div.code-editor {
+/*- CONTENT WITHIN CELLS -*/
+
+.code-editor {
   width:  calc(100% - var(--scrollbar-width));
   height: calc(100% - var(--scrollbar-width));
 }
 
-pre.pre {
+.preview {
   width:  calc(50% - (var(--border-size) / 2)) - var(--scrollbar-width);
   height: calc(100% - var(--scrollbar-width));
   font-size: 200%; /* larger to see scrollbar with less text */
