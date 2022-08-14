@@ -76,12 +76,12 @@ class Resizer {
     if (this.resizeVertical) {
       this.elements[index1].style.height = elem1Dim + 'px';
       this.bars[index1].style.top = elem1Dim + 'px';
-      this.elements[index2].style.top = elem1Dim + this.barPixelSize + 'px';
+      this.elements[index2].style.top = (elem1Dim + this.barPixelSize) + 'px';
       this.elements[index2].style.height = elem2Dim + 'px';
     } else {
       this.elements[index1].style.width = elem1Dim + 'px';
       this.bars[index1].style.left = elem1Dim + 'px';
-      this.elements[index2].style.left = elem1Dim + this.barPixelSize + 'px';
+      this.elements[index2].style.left = (elem1Dim + this.barPixelSize) + 'px';
       this.elements[index2].style.width = elem2Dim + 'px';
     }
 
