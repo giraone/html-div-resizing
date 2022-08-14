@@ -38,6 +38,14 @@
   - Automatic switching to scrollbars, when the inner content is larger than the resized outer container.
 - For simplicity, the sidebar was removed.
 
+![iteration-4](docs/images/iteration4.png "Resizing with four Monaco Editors controls on the left side")
+
+## Iteration 5 - "resizing with iframe"
+
+- The left side is identical to iteration 4 with four Monaco Editors controls.
+- The right side contains now an `<iframe>` to display HTML in the upper element
+- and a `<pre>` element
+
 ### Details
 - Resizing of inner elements:
-  - For the &lt;pre&gt; elements, this is achieved by setting the height to `height: calc(100% - var(--scrollbar-size));`
+  - For the &lt;pre&gt; elements, this is achieved by setting the height to `height: calc(100% - var(--scrollbar-width));`
