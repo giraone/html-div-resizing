@@ -79,7 +79,6 @@ div.verticalBar:active {
   background-color: orangered;
 }
 div.horizontalBar {
-  top: 50vh;
   height: var(--border-size);
   background-color: var(--resizer-color);
   cursor: ns-resize;
@@ -113,7 +112,7 @@ div.card75-2 {
 .preview {
   width:  calc(50% - (var(--border-size) / 2)) - var(--scrollbar-width);
   height: calc(100% - var(--scrollbar-width));
-  font-size: 200%; /* larger to see scrollbar with less text */
+  font-size: 125%; /* larger to see scrollbar with less text */
   color: var(--default-color);
   padding: 5px;
   overflow-x: auto;
